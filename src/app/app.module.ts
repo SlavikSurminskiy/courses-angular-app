@@ -4,9 +4,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { HeaderComponent } from './header/header.component';
+import { LogoComponent } from './logo/logo.component';
+import { CoursesComponent } from './courses/courses.component';
+import { FooterComponent } from './footer/footer.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    LogoComponent,
+    CoursesComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
