@@ -1,7 +1,7 @@
 <div class="course-card">
   <div class="course-card__description">
     <h2 class="title">
-      <a href="#">{{course.title}}</a>
+      <a [routerLink]="[course.id]">{{course.title}}</a>
     </h2>
     <p class="description">{{course.description}}</p>
   </div>

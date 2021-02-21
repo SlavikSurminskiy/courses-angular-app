@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { LogoComponent } from './logo/logo.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { CourseComponent } from './course/course.component';
 import { CoursesComponent } from './courses/courses.component';
 import { CourseCardComponent } from './course-card/course-card.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
@@ -25,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LogoComponent,
     FooterComponent,
     HeaderComponent,
+    CourseComponent,
     CoursesComponent,
     CourseCardComponent,
     BreadcrumbsComponent,
