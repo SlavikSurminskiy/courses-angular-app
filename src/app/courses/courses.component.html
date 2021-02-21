@@ -21,4 +21,15 @@
       <mat-icon>add</mat-icon> Add
     </button>
   </div>
+
+  <app-course-card
+    *ngFor="let c of courses"
+    [course]="c"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+  ></app-course-card>
+
+  <div class="courses__load-more">
+    <button (click)="onLoadMore()">Load More</button>
+  </div>
 </div>

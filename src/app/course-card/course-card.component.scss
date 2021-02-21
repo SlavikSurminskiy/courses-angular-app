@@ -1,0 +1,67 @@
+@import "src/styles/media";
+
+.course-card {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  padding: 20px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+
+  @include media-below-medium {
+    flex-direction: column;
+  }
+
+  &__description {
+    .title {
+      a {
+        color: #000;
+        text-decoration: none;
+      }
+    }
+
+    .description {
+      color: #5a5a5a;
+      line-height: 24px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 200px;
+    margin-left: 20px;
+
+    @include media-below-medium {
+      flex-basis: auto;
+      margin-left: 0;
+    }
+
+    .duration {
+      display: flex;
+
+      span {
+        display: flex;
+        align-items: center;
+
+        &:not(:last-of-type) {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .actions {
+      margin-top: 20px;
+
+      button {
+        &:not(:last-of-type) {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
