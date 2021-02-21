@@ -1,1 +1,24 @@
-<p>courses works!</p>
+<div class="courses">
+  <div class="courses__search">
+    <form (ngSubmit)="onSearch()">
+      <mat-form-field appearance="outline">
+        <mat-label>Search courses</mat-label>
+        <input
+          matInput
+          type="text"
+          name="search"
+          placeholder="Search"
+          [(ngModel)]="searchQuery"
+        >
+        <mat-icon matSuffix (click)="onSearch()">search</mat-icon>
+      </mat-form-field>
+      <button type="submit" mat-raised-button color="primary">Search</button>
+    </form>
+  </div>
+
+  <div class="courses__add">
+    <button mat-raised-button color="accent">
+      <mat-icon>add</mat-icon> Add
+    </button>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+@import "src/styles/colors";
+
+.courses {
+  &__search {
+    display: flex;
+    margin: 20px 0;
+
+    form {
+      display: flex;
+
+      .mat-form-field-wrapper {
+        margin: 0;
+        padding: 0;
+      }
+
+      .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+        color: $accent-color;
+      }
+
+      button[type=submit] {
+        margin-left: 20px;
+        padding: 0 25px;
+      }
+    }
+  }
+
+  &__add {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+

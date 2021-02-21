@@ -1,3 +1,5 @@
+@import "styles/colors";
+
 html, body {
   height: 100%;
 }
@@ -35,4 +37,18 @@ main {
   max-width: 1140px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+.mat-flat-button.mat-accent,
+.mat-raised-button.mat-accent,
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent {
+  background: $accent-color;
+}
+
+.mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+  background: $primary-color;
 }
