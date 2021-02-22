@@ -1,0 +1,25 @@
+@import "src/styles/colors.scss";
+
+.header-wrapper {
+  padding: 20px;
+  background: $grey-dark-bg;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__buttons {
+    display: flex;
+
+    button {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border: none;
+      color: $text-color-light;
+      cursor: pointer;
+    }
+  }
+}

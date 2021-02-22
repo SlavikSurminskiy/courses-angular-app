@@ -1,0 +1,11 @@
+@import "src/styles/colors.scss";
+
+.footer-wrapper {
+  padding: 20px;
+  background: $grey-dark-bg;
+}
+
+.footer {
+  text-align: right;
+  color: $text-color-light;
+}

@@ -1,0 +1,19 @@
+@mixin media-narrow {
+  @media (max-width: 575px) { @content; }
+}
+
+@mixin media-medium-narrow {
+  @media (min-width: 576px) and (max-width: 767px) { @content; }
+}
+
+@mixin media-medium {
+  @media (min-width: 768px) and (max-width: 1023px) { @content; }
+}
+
+@mixin media-below-medium {
+  @media (max-width: 767px) { @content; }
+}
+
+@mixin media-below-wide {
+  @media (max-width: 1023px) { @content; }
+}

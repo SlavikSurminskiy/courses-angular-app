@@ -1,0 +1,63 @@
+@import "src/styles/colors";
+@import "src/styles/media";
+@import "src/styles/mixins";
+
+.course-card {
+  @include course-card-style();
+  display: flex;
+  justify-content: space-between;
+
+  @include media-below-medium {
+    flex-direction: column;
+  }
+
+  &__description {
+    .title {
+      a {
+        color: $text-color-dark;
+        text-decoration: none;
+      }
+    }
+
+    .description {
+      color: $text-color-grey;
+      line-height: 24px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex: 1 0 auto;
+    margin-left: 20px;
+
+    @include media-below-medium {
+      flex-basis: auto;
+      margin-left: 0;
+    }
+
+    .duration {
+      display: flex;
+
+      span {
+        display: flex;
+        align-items: center;
+
+        &:not(:last-of-type) {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .actions {
+      margin-top: 20px;
+
+      button {
+        &:not(:last-of-type) {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

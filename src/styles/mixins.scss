@@ -1,0 +1,9 @@
+@import "src/styles/colors";
+
+@mixin course-card-style {
+  margin: 30px 0;
+  padding: 20px;
+  background: $course-card-bg;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, .3);
+}

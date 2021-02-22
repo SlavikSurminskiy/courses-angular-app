@@ -1,0 +1,30 @@
+<div class="course-card">
+  <div class="course-card__description">
+    <h2 class="title">
+      <a [routerLink]="[course.id]">{{course.title}}</a>
+    </h2>
+    <p class="description">{{course.description}}</p>
+  </div>
+  <div class="course-card__actions">
+    <div class="duration">
+      <span><mat-icon>schedule</mat-icon>{{courseDuration}}</span>
+      <span><mat-icon>date_range</mat-icon>{{course.creationDate}}</span>
+    </div>
+    <div class="actions">
+      <button
+        mat-raised-button color="accent"
+        (click)="onEditClick()"
+      >
+        <mat-icon>edit</mat-icon>
+        Edit
+      </button>
+      <button
+        mat-raised-button color="accent"
+        (click)="onDeleteClick()"
+      >
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

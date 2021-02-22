@@ -1,0 +1,48 @@
+@import "src/styles/colors";
+@import "src/styles/mixins";
+
+.courses {
+  &__search {
+    display: flex;
+    margin: 20px 0;
+
+    form {
+      display: flex;
+
+      .mat-form-field-wrapper {
+        margin: 0;
+        padding: 0;
+      }
+
+      .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+        color: $accent-color;
+      }
+
+      button[type=submit] {
+        margin-left: 20px;
+        padding: 0 25px;
+      }
+    }
+  }
+
+  &__add {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__load-more {
+    @include course-card-style();
+    display: flex;
+    justify-content: center;
+
+    button {
+      background: none;
+      color: $accent-color;
+      border: none;
+      text-transform: uppercase;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
