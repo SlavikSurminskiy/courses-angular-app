@@ -23,8 +23,8 @@
   </div>
 
   <app-course-card
-    *ngFor="let c of courses"
-    [course]="c"
+    *ngFor="let course of courses"
+    [course]="course"
     (edit)="onEdit($event)"
     (delete)="onDelete($event)"
   ></app-course-card>
