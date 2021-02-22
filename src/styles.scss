@@ -1,5 +1,7 @@
 @import "styles/colors";
 
+$main-content-bg: #f5f6fa;
+
 html, body {
   height: 100%;
 }
@@ -17,7 +19,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #f5f6fa;
+  background: $main-content-bg;
 }
 
 .content {

@@ -1,13 +1,11 @@
+@import "src/styles/colors";
 @import "src/styles/media";
+@import "src/styles/mixins";
 
 .course-card {
+  @include course-card-style();
   display: flex;
   justify-content: space-between;
-  margin: 30px 0;
-  padding: 20px;
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
 
   @include media-below-medium {
     flex-direction: column;
@@ -16,13 +14,13 @@
   &__description {
     .title {
       a {
-        color: #000;
+        color: $text-color-dark;
         text-decoration: none;
       }
     }
 
     .description {
-      color: #5a5a5a;
+      color: $text-color-grey;
       line-height: 24px;
     }
   }
