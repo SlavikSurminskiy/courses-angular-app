@@ -7,9 +7,6 @@ import { ICourse } from '../../shared/models/course.model';
   providedIn: 'root'
 })
 export class CoursesService {
-
-  constructor() { }
-
   getCourses(): ICourse[] {
     return COURSES;
   }
