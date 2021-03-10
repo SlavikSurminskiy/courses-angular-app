@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseCardComponent } from './course-card.component';
 
-import { ICourse } from '../shared/models/course.model';
+import { ICourse } from '../../shared/models/course.model';
 
 describe('CourseCardComponent', () => {
   let component: CourseCardComponent;

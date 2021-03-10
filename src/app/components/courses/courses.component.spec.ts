@@ -5,11 +5,11 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
-import { CoursesService } from '../services/courses/courses.service';
+import { CoursesService } from '../../services/courses/courses.service';
 import { CoursesComponent } from './courses.component';
 import { CourseCardComponent } from '../course-card/course-card.component';
 
-import { ICourse } from '../shared/models/course.model';
+import { ICourse } from '../../shared/models/course.model';
 
 const CoursesServiceStub = {
   getCourses(): ICourse[] {

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { ICourse } from '../shared/models/course.model';
-import { CoursesService } from '../services/courses/courses.service';
+import { ICourse } from '../../shared/models/course.model';
+import { CoursesService } from '../../services/courses/courses.service';
 
 @Component({
   selector: 'app-courses',
