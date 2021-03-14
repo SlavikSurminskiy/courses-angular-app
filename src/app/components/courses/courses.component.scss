@@ -2,6 +2,8 @@
 @import "src/styles/mixins";
 
 .courses {
+  min-width: 80vw;
+
   &__search {
     display: flex;
     margin: 20px 0;
@@ -43,6 +45,12 @@
       text-decoration: underline;
       cursor: pointer;
     }
+  }
+
+  &__no-cousrses {
+    @include course-card-style();
+    text-align: center;
+    text-transform: uppercase;
   }
 }
 
