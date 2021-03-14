@@ -12,6 +12,7 @@ export class CourseCardComponent {
     title: '',
     creationDate: '',
     duration: 0,
+    topRated: false,
     description: '',
   };
 

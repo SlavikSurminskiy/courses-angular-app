@@ -51,6 +51,7 @@ describe('CourseCardComponent', () => {
       title: '',
       creationDate: '',
       duration: 0,
+      topRated: false,
       description: '',
     };
 
@@ -68,6 +69,7 @@ describe('CourseCardComponent', () => {
       title: '',
       creationDate: '',
       duration: 0,
+      topRated: false,
       description: '',
     };
 
@@ -85,6 +87,7 @@ describe('CourseCardComponent', () => {
       title: '',
       creationDate: '',
       duration: 150,
+      topRated: false,
       description: '',
     };
 
