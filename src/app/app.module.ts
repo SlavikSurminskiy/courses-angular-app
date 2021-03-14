@@ -13,6 +13,9 @@ import { CoursesComponent } from './components/courses/courses.component';
 import { CourseCardComponent } from './components/course-card/course-card.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
+// directives
+import { CourseCardCreationDateDirective } from './directives/course-card/course-card-creation-date.directive';
+
 // material
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -30,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CoursesComponent,
     CourseCardComponent,
     BreadcrumbsComponent,
+    CourseCardCreationDateDirective,
   ],
   imports: [
     FormsModule,

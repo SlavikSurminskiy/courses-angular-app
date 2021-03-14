@@ -1,4 +1,4 @@
-<div class="course-card">
+<div class="course-card" [appCourseCardCreationDate]="course.creationDate">
   <div class="course-card__description">
     <h2 class="title">
       <a [routerLink]="[course.id]">{{course.title}}</a>
