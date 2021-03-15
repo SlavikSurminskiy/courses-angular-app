@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseCardComponent } from './course-card.component';
 
+import { CourseDurationPipe } from '../../pipes/course-duration/course-duration.pipe';
+
 import { ICourse } from '../../shared/models/course.model';
 
 describe('CourseCardComponent', () => {
@@ -10,7 +12,10 @@ describe('CourseCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CourseCardComponent ]
+      declarations: [
+        CourseCardComponent,
+        CourseDurationPipe,
+      ]
     })
     .compileComponents();
   });
