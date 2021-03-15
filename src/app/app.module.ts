@@ -17,6 +17,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { CourseCardCreationDateDirective } from './directives/course-card/course-card-creation-date.directive';
 
 // pipes
+import { CoursesFilterPipe } from './pipes/courses-filter/courses-filter.pipe';
 import { CourseDurationPipe } from './pipes/course-duration/course-duration.pipe';
 import { CourseDateSortPipe } from './pipes/course-date-sort/course-date-sort.pipe';
 
@@ -40,6 +41,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CourseCardCreationDateDirective,
     CourseDurationPipe,
     CourseDateSortPipe,
+    CoursesFilterPipe,
   ],
   imports: [
     FormsModule,
