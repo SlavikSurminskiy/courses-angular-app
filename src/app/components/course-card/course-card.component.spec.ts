@@ -78,21 +78,4 @@ describe('CourseCardComponent', () => {
     comp.delete.subscribe((id: string) => expect(id).toBe(course.id));
     comp.onDeleteClick();
   });
-
-  it('should return formatted course duration', () => {
-    const comp = new CourseCardComponent();
-
-    const course: ICourse = {
-      id: '1',
-      title: '',
-      creationDate: '',
-      duration: 150,
-      topRated: false,
-      description: '',
-    };
-
-    comp.course = course;
-
-    expect(comp.courseDuration).toBe('2h 30min');
-  });
 });

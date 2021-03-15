@@ -5,7 +5,7 @@
 >
   <div class="course-card__description">
     <h2 class="title">
-      <a [routerLink]="[course.id]">{{course.title}}</a>
+      <a [routerLink]="[course.id]">{{course.title | uppercase }}</a>
       <mat-icon
         *ngIf="course.topRated"
         class="star-icon"
@@ -17,8 +17,8 @@
   </div>
   <div class="course-card__actions">
     <div class="duration">
-      <span><mat-icon>schedule</mat-icon>{{courseDuration}}</span>
-      <span><mat-icon>date_range</mat-icon>{{course.creationDate}}</span>
+      <span><mat-icon>schedule</mat-icon>{{course.duration | courseDuration}}</span>
+      <span><mat-icon>date_range</mat-icon>{{course.creationDate |  date:'short'}}</span>
     </div>
     <div class="actions">
       <button

@@ -19,14 +19,6 @@ export class CourseCardComponent {
   @Output() edit: EventEmitter<string> = new EventEmitter();
   @Output() delete: EventEmitter<string> = new EventEmitter();
 
-  get courseDuration(): string {
-    const { duration } = this.course;
-    const hours = Math.floor(duration / 60);
-    const minutes = duration % 60;
-
-    return `${hours}h ${minutes}min`;
-  }
-
   onEditClick(): void {
     this.edit.emit(this.course.id);
   }
