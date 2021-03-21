@@ -23,13 +23,19 @@
   </div>
 
   <app-course-card
-    *ngFor="let course of courses"
+    *ngFor="let course of courses | courseDateSort"
     [course]="course"
     (edit)="onEdit($event)"
     (delete)="onDelete($event)"
   ></app-course-card>
 
-  <div class="courses__load-more">
+  <div class="courses__load-more" *ngIf="courses.length > 0; else noCourses">
     <button (click)="onLoadMore()">Load More</button>
   </div>
+
+  <ng-template #noCourses>
+    <div class="courses__no-cousrses">
+      No Data. Feel free to add new course
+    </div>
+  </ng-template>
 </div>

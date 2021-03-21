@@ -2,7 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseCardComponent } from './course-card.component';
 
-import { ICourse } from '../shared/models/course.model';
+import { CourseDurationPipe } from '../../pipes/course-duration/course-duration.pipe';
+
+import { ICourse } from '../../shared/models/course.model';
 
 describe('CourseCardComponent', () => {
   let component: CourseCardComponent;
@@ -10,7 +12,10 @@ describe('CourseCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CourseCardComponent ]
+      declarations: [
+        CourseCardComponent,
+        CourseDurationPipe,
+      ]
     })
     .compileComponents();
   });
@@ -51,6 +56,7 @@ describe('CourseCardComponent', () => {
       title: '',
       creationDate: '',
       duration: 0,
+      topRated: false,
       description: '',
     };
 
@@ -68,6 +74,7 @@ describe('CourseCardComponent', () => {
       title: '',
       creationDate: '',
       duration: 0,
+      topRated: false,
       description: '',
     };
 
@@ -75,21 +82,5 @@ describe('CourseCardComponent', () => {
 
     comp.delete.subscribe((id: string) => expect(id).toBe(course.id));
     comp.onDeleteClick();
-  });
-
-  it('should return formatted course duration', () => {
-    const comp = new CourseCardComponent();
-
-    const course: ICourse = {
-      id: '1',
-      title: '',
-      creationDate: '',
-      duration: 150,
-      description: '',
-    };
-
-    comp.course = course;
-
-    expect(comp.courseDuration).toBe('2h 30min');
   });
 });

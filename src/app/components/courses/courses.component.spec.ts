@@ -5,11 +5,15 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
-import { CoursesService } from '../services/courses/courses.service';
+import { CoursesService } from '../../services/courses/courses.service';
 import { CoursesComponent } from './courses.component';
 import { CourseCardComponent } from '../course-card/course-card.component';
 
-import { ICourse } from '../shared/models/course.model';
+import { CoursesFilterPipe } from '../../pipes/courses-filter/courses-filter.pipe';
+import { CourseDateSortPipe } from '../../pipes/course-date-sort/course-date-sort.pipe';
+import { CourseDurationPipe } from '../../pipes/course-duration/course-duration.pipe';
+
+import { ICourse } from '../../shared/models/course.model';
 
 const CoursesServiceStub = {
   getCourses(): ICourse[] {
@@ -17,15 +21,17 @@ const CoursesServiceStub = {
       {
         id: '01',
         title: 'Video Course 1. Name tag',
-        creationDate: '21/02/2020',
+        creationDate: '2022-10-05T14:48:00.000Z',
         duration: 65,
+        topRated: false,
         description: 'Lorem Ipsum',
       },
       {
         id: '02',
         title: 'Video Course 2. Name tag',
-        creationDate: '22/02/2020',
+        creationDate: '2022-10-05T14:48:00.000Z',
         duration: 65,
+        topRated: false,
         description: 'Lorem Ipsum',
       }
     ];
@@ -39,7 +45,13 @@ describe('CoursesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CoursesComponent, CourseCardComponent],
+      declarations: [
+        CoursesComponent,
+        CourseCardComponent,
+        CourseDateSortPipe,
+        CoursesFilterPipe,
+        CourseDurationPipe,
+      ],
       providers: [{provide: CoursesService, useValue: CoursesServiceStub}],
       imports: [FormsModule],
     })
@@ -89,13 +101,22 @@ describe('CoursesComponent', () => {
     expect(component.onSearch).toHaveBeenCalled();
   });
 
-  it('should log search query', () => {
-    const spy = spyOn(console, 'log');
+  it('should return all courses for empty search query', () => {
+    component.courses = CoursesServiceStub.getCourses();
 
-    component.searchQuery = 'test_search';
+    component.searchQuery = '';
     component.onSearch();
 
-    expect(spy.calls.argsFor(0)[0]).toEqual('test_search');
+    expect(component.courses).toEqual(CoursesServiceStub.getCourses());
+  });
+
+  it('should filter courses by search query', () => {
+    component.courses = CoursesServiceStub.getCourses();
+
+    component.searchQuery = 'Video Course 1';
+    component.onSearch();
+
+    expect(component.courses).toEqual([CoursesServiceStub.getCourses()[0]]);
   });
 
   it('should subscribe on edit event from children component', () => {

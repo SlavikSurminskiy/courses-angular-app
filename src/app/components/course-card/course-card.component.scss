@@ -11,11 +11,23 @@
     flex-direction: column;
   }
 
+  &--top-rated {
+    background: $top-rated-course;
+  }
+
   &__description {
     .title {
+      display: flex;
+      align-items: center;
+
       a {
         color: $text-color-dark;
         text-decoration: none;
+      }
+
+      .star-icon {
+        margin-left: 5px;
+        color: yellow;
       }
     }
 

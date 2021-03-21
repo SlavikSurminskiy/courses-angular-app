@@ -5,13 +5,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { LogoComponent } from './logo/logo.component';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
-import { CourseComponent } from './course/course.component';
-import { CoursesComponent } from './courses/courses.component';
-import { CourseCardComponent } from './course-card/course-card.component';
-import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { LogoComponent } from './components/logo/logo.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { CourseComponent } from './components/course/course.component';
+import { CoursesComponent } from './components/courses/courses.component';
+import { CourseCardComponent } from './components/course-card/course-card.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+
+// directives
+import { CourseCardCreationDateDirective } from './directives/course-card/course-card-creation-date.directive';
+
+// pipes
+import { CoursesFilterPipe } from './pipes/courses-filter/courses-filter.pipe';
+import { CourseDurationPipe } from './pipes/course-duration/course-duration.pipe';
+import { CourseDateSortPipe } from './pipes/course-date-sort/course-date-sort.pipe';
 
 // material
 import { MatIconModule } from '@angular/material/icon';
@@ -30,6 +38,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CoursesComponent,
     CourseCardComponent,
     BreadcrumbsComponent,
+    CourseCardCreationDateDirective,
+    CourseDurationPipe,
+    CourseDateSortPipe,
+    CoursesFilterPipe,
   ],
   imports: [
     FormsModule,
