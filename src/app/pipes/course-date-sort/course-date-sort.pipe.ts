@@ -9,11 +9,9 @@ import { ICourse } from '../../shared/models/course.model';
 export class CourseDateSortPipe implements PipeTransform {
 
   transform(courses: ICourse[], order: 'new' | 'old' = 'new'): ICourse[] {
-    const arrCopy = [...courses];
-
     const multiplier = order === 'new' ? -1 : 1;
 
-    arrCopy.sort((a, b) => {
+    courses.sort((a, b) => {
       const d1 = moment(a.creationDate);
       const d2 = moment(b.creationDate);
 
@@ -26,6 +24,6 @@ export class CourseDateSortPipe implements PipeTransform {
       return 0;
     });
 
-    return arrCopy;
+    return courses;
   }
 }
