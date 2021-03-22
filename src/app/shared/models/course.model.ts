@@ -6,3 +6,5 @@ export interface ICourse {
   topRated: boolean;
   description: string;
 }
+
+export type CourseUpdate = Omit<ICourse, 'id'>;
