@@ -13,13 +13,14 @@
   &__buttons {
     display: flex;
 
-    button {
+    button, a {
       display: flex;
       align-items: center;
       background: transparent;
       border: none;
       color: $text-color-light;
       cursor: pointer;
+      text-decoration: none;
     }
   }
 }

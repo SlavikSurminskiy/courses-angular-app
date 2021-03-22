@@ -1,0 +1,19 @@
+@import 'src/styles/mixins';
+
+.login-form {
+  @include course-card-style();
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+  margin-top: 80px;
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
