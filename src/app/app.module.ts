@@ -12,6 +12,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CourseComponent } from './components/course/course.component';
 import { CoursesComponent } from './components/courses/courses.component';
+import { AddCourseComponent } from './components/add-course/add-course.component';
 import { CourseCardComponent } from './components/course-card/course-card.component';
 import { CourseFormComponent } from './components/course-form/course-form.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
@@ -41,6 +42,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     CourseComponent,
     CoursesComponent,
+    AddCourseComponent,
     CourseCardComponent,
     CourseFormComponent,
     BreadcrumbsComponent,
