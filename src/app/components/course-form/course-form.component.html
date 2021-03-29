@@ -1,0 +1,58 @@
+<form (ngSubmit)="onSubmit()" class="course-form">
+  <h1>{{headline}}</h1>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        type="text"
+        name="title"
+        placeholder="Course title"
+        [(ngModel)]="title"
+      >
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea
+        rows="10"
+        matInput
+        type="text"
+        name="description"
+        placeholder="Course description"
+        [(ngModel)]="description"
+      ></textarea>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline" class="mat-form-field--width-small">
+      <mat-label>Date</mat-label>
+      <input
+        matInput
+        type="date"
+        name="new Date(creationDate)"
+        placeholder="Course date"
+        [(ngModel)]="creationDate"
+      >
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline" class="mat-form-field--width-small">
+      <mat-label>Duration</mat-label>
+      <input
+        matInput
+        type="number"
+        name="duration"
+        placeholder="Course duration"
+        min="0"
+        [(ngModel)]="duration"
+      >
+    </mat-form-field>
+    {{duration | courseDuration}}
+  </p>
+  <div class="course-form__footer">
+    <a [routerLink]="['/..']" mat-raised-button color="accent">Cancel</a>
+    <button type="submit" mat-raised-button color="primary">Save</button>
+  </div>
+</form>

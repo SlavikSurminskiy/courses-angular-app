@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { CourseComponent } from './components/course/course.component';
 import { CoursesComponent } from './components/courses/courses.component';
 import { CourseCardComponent } from './components/course-card/course-card.component';
+import { CourseFormComponent } from './components/course-form/course-form.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { DeleteCourseDialogComponent } from './components/delete-course-dialog/delete-course-dialog.component';
 
@@ -35,18 +36,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     LogoComponent,
+    LoginComponent,
     FooterComponent,
     HeaderComponent,
     CourseComponent,
     CoursesComponent,
     CourseCardComponent,
+    CourseFormComponent,
     BreadcrumbsComponent,
     DeleteCourseDialogComponent,
     CourseCardCreationDateDirective,
     CourseDurationPipe,
     CourseDateSortPipe,
     CoursesFilterPipe,
-    LoginComponent,
   ],
   imports: [
     FormsModule,
