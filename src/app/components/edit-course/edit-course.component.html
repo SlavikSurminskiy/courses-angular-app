@@ -1,0 +1,8 @@
+<app-course-form
+  headline="Edit course"
+  [title]="course.title"
+  [description]="course.description"
+  [duration]="course.duration"
+  [creationDate]="course.creationDate"
+  (saveCourse)="onSaveCourse($event)"
+></app-course-form>

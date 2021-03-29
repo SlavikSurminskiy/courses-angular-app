@@ -21,13 +21,9 @@
       <span><mat-icon>date_range</mat-icon>{{course.creationDate |  date:'short'}}</span>
     </div>
     <div class="actions">
-      <button
-        mat-raised-button color="accent"
-        (click)="onEditClick()"
-      >
-        <mat-icon>edit</mat-icon>
-        Edit
-      </button>
+      <a [routerLink]="[course.id, 'edit']" mat-raised-button color="accent">
+        <mat-icon>edit</mat-icon> Edit
+      </a>
       <button
         mat-raised-button color="accent"
         (click)="onDeleteClick()"
