@@ -5,11 +5,11 @@
         <app-logo></app-logo>
       </div>
       <div class="header__buttons">
-        <button>
+        <a [routerLink]="['login']">
           <mat-icon>person</mat-icon>
           User login
-        </button>
-        <button>
+        </a>
+        <button (click)="onLogout()">
           <mat-icon>logout</mat-icon>
           Log out
         </button>
