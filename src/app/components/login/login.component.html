@@ -1,0 +1,32 @@
+<form (ngSubmit)="onLogin()" class="login-form">
+  <h1>Login</h1>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        type="text"
+        name="email"
+        placeholder="Enter e-mail"
+        [(ngModel)]="email"
+      >
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Search courses</mat-label>
+      <input
+        matInput
+        type="password"
+        name="email"
+        placeholder="Enter password"
+        [(ngModel)]="password"
+      >
+    </mat-form-field>
+  </p>
+  <div class="login-form__footer">
+    <a href="">Forgot password?</a>
+    <button type="submit" mat-raised-button color="primary">Login</button>
+  </div>
+</form>
+
