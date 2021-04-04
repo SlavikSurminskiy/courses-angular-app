@@ -6,6 +6,7 @@ import { CourseComponent } from './components/course/course.component';
 import { CoursesComponent } from './components/courses/courses.component';
 import { AddCourseComponent } from './components/add-course/add-course.component';
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'courses', pathMatch: 'full' },
@@ -14,6 +15,8 @@ const routes: Routes = [
   { path: 'courses/new', component: AddCourseComponent },
   { path: 'courses/:courseId', component: CourseComponent },
   { path: 'courses/:courseId/edit', component: EditCourseComponent },
+  { path: '404', component: PageNotFoundComponent },
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({
