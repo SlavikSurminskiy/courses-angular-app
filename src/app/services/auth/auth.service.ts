@@ -14,8 +14,6 @@ export class AuthService {
     id: '01',
   };
 
-  constructor() { }
-
   login(user: AuthUser): void {
     localStorage.setItem(this.LS_USER, JSON.stringify({
       ...this.fakeUser,
