@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,7 @@ import { CourseComponent } from './components/course/course.component';
 import { CoursesComponent } from './components/courses/courses.component';
 import { CourseCardComponent } from './components/course-card/course-card.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { DeleteCourseDialogComponent } from './components/delete-course-dialog/delete-course-dialog.component';
 
 // directives
 import { CourseCardCreationDateDirective } from './directives/course-card/course-card-creation-date.directive';
@@ -38,6 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CoursesComponent,
     CourseCardComponent,
     BreadcrumbsComponent,
+    DeleteCourseDialogComponent,
     CourseCardCreationDateDirective,
     CourseDurationPipe,
     CourseDateSortPipe,
@@ -51,6 +54,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatButtonModule,
     MatSidenavModule,
+    MatDialogModule,
     BrowserAnimationsModule
   ],
   providers: [],
