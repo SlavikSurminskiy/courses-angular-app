@@ -14,8 +14,6 @@ export class AuthService {
     id: '01',
   };
 
-  constructor() { }
-
   login(user: AuthUser): boolean {
     if (user.email === 'admin' && user.password === '1234') {
       localStorage.setItem(this.LS_USER, JSON.stringify({

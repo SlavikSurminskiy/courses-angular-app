@@ -45,7 +45,8 @@ export class CoursesComponent implements OnInit {
       data: {...course},
     }).afterClosed().subscribe((deleteCourse: boolean) => {
       if (deleteCourse) {
-        this.courses = this._coursesService.deteteCourse(courseId);
+        this._coursesService.deleteCourse(courseId);
+        this.courses = this._coursesService.getCourses();
       }
     });
   }
