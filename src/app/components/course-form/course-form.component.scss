@@ -1,0 +1,27 @@
+@import 'src/styles/mixins';
+
+.course-form {
+  @include course-card-style();
+  display: flex;
+  flex-direction: column;
+  min-width: 800px;
+  margin-top: 80px;
+
+  .mat-form-field {
+    width: 100%;
+
+    &--width-small {
+      max-width: 200px;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    a {
+      margin-right: 15px;
+    }
+  }
+}

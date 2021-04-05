@@ -13,26 +13,20 @@ export class CoursesService {
     return this._courses;
   }
 
-  addCourse(course: ICourse): ICourse[] {
+  addCourse(course: ICourse): void {
     this._courses.push(course);
-
-    return this._courses;
   }
 
   getCourse(id: string): ICourse | undefined {
     return this._courses.find((course) => course.id === id);
   }
 
-  updateCourse(id: string, data: CourseUpdate): ICourse[] {
+  updateCourse(id: string, data: CourseUpdate): void {
     const target = this._courses.find((course) => course.id === id);
     Object.assign(target, data);
-
-    return this._courses;
   }
 
-  deteteCourse(id: string): ICourse[] {
+  deleteCourse(id: string): void {
     this._courses = this._courses.filter((course) => course.id !== id);
-
-    return this._courses;
   }
 }
