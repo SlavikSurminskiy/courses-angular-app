@@ -12,7 +12,7 @@ import { CourseUpdate, ICourse } from '../../shared/models/course.model';
 export class EditCourseComponent implements OnInit {
   course: ICourse = {
     id: '',
-    title: '',
+    name: '',
     duration: 0,
     topRated: false,
     description: '',

@@ -18,7 +18,7 @@ export class CourseFormComponent {
 
   onSubmit(): void {
     this.saveCourse.emit({
-      title: this.title,
+      name: this.title,
       duration: this.duration,
       description: this.description,
       creationDate: this.creationDate,

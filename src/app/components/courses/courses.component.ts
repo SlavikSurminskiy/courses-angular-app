@@ -25,12 +25,15 @@ export class CoursesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.courses = this._coursesService.getCourses();
+    this._coursesService.getCourses().subscribe((courses) => {
+      this.courses = courses;
+    });
   }
 
   onSearch(): void {
-    const courses = this._coursesService.getCourses();
-    this.courses = this._courseFilter.transform(courses, this.searchQuery);
+    this._coursesService.getCourses().subscribe((courses) => {
+      this.courses = this._courseFilter.transform(courses, this.searchQuery);
+    });
   }
 
   onEdit(courseId: string): void {
@@ -46,7 +49,9 @@ export class CoursesComponent implements OnInit {
     }).afterClosed().subscribe((deleteCourse: boolean) => {
       if (deleteCourse) {
         this._coursesService.deleteCourse(courseId);
-        this.courses = this._coursesService.getCourses();
+        this._coursesService.getCourses().subscribe((courses) => {
+          this.courses = courses;
+        });
       }
     });
   }

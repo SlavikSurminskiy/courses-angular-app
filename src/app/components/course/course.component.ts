@@ -18,7 +18,7 @@ export class CourseComponent implements OnInit {
 
   course: ICourse = {
     id: '',
-    title: '',
+    name: '',
     duration: 0,
     topRated: false,
     description: '',

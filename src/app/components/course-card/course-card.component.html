@@ -5,7 +5,7 @@
 >
   <div class="course-card__description">
     <h2 class="title">
-      <a [routerLink]="[course.id]">{{course.title | uppercase }}</a>
+      <a [routerLink]="[course.id]">{{course.name | uppercase }}</a>
       <mat-icon
         *ngIf="course.topRated"
         class="star-icon"

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { COURSES } from './mock-courses';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 import { ICourse, CourseUpdate } from '../../shared/models/course.model';
 
 @Injectable({
@@ -9,8 +12,10 @@ import { ICourse, CourseUpdate } from '../../shared/models/course.model';
 export class CoursesService {
   private _courses = COURSES;
 
-  getCourses(): ICourse[] {
-    return this._courses;
+  constructor(private _http: HttpClient) {}
+
+  getCourses(): Observable<ICourse[]> {
+    return this._http.get<ICourse[]>('courses');
   }
 
   addCourse(course: ICourse): void {

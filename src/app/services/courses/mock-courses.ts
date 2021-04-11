@@ -3,7 +3,7 @@ import { ICourse } from '../../shared/models/course.model';
 export const COURSES: ICourse[] = [
   {
     id: '01',
-    title: 'Video Course 1. Name tag',
+    name: 'Video Course 1. Name tag',
     creationDate: '2021-03-15',
     duration: 65,
     topRated: false,
@@ -11,7 +11,7 @@ export const COURSES: ICourse[] = [
   },
   {
     id: '02',
-    title: 'Video Course 2. Name tag',
+    name: 'Video Course 2. Name tag',
     creationDate: '2021-03-25',
     duration: 65,
     topRated: true,
@@ -19,7 +19,7 @@ export const COURSES: ICourse[] = [
   },
   {
     id: '03',
-    title: 'Video Course 3. Name tag',
+    name: 'Video Course 3. Name tag',
     creationDate: '2021-03-08',
     duration: 45,
     topRated: false,
@@ -27,7 +27,7 @@ export const COURSES: ICourse[] = [
   },
   {
     id: '04',
-    title: 'Video Course 4. Name tag',
+    name: 'Video Course 4. Name tag',
     creationDate: '2022-10-05',
     duration: 65,
     topRated: false,
