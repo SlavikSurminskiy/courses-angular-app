@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { COURSES } from './mock-courses';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ICourse, CourseUpdate } from '../../shared/models/course.model';
@@ -14,8 +14,12 @@ export class CoursesService {
 
   constructor(private _http: HttpClient) {}
 
-  getCourses(): Observable<ICourse[]> {
-    return this._http.get<ICourse[]>('courses');
+  getCourses({start, count} = {start: '0', count: '10'}): Observable<ICourse[]> {
+    return this._http.get<ICourse[]>('courses', {
+      params: new HttpParams()
+        .set('start', start)
+        .set('count', count)
+    });
   }
 
   addCourse(course: ICourse): void {

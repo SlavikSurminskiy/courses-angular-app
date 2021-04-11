@@ -18,6 +18,9 @@ export class CoursesComponent implements OnInit {
   searchQuery = '';
   courses: ICourse[] = [];
 
+  private COURSES_PER_PAGE = 10;
+  private currentPage = 1;
+
   constructor(
     private _dialog: MatDialog,
     private _coursesService: CoursesService,
@@ -57,6 +60,12 @@ export class CoursesComponent implements OnInit {
   }
 
   onLoadMore(): void {
-    console.log('call load more');
+    this.currentPage++;
+    const count = (this.currentPage * this.COURSES_PER_PAGE).toString();
+
+    this._coursesService.getCourses({start: '0', count})
+      .subscribe((courses) => {
+        this.courses = courses;
+      });
   }
 }
