@@ -13,10 +13,38 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 const routes: Routes = [
   { path: '', redirectTo: 'courses', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'courses', component: CoursesComponent, canActivate: [AuthGuard] },
-  { path: 'courses/new', component: AddCourseComponent, canActivate: [AuthGuard] },
-  { path: 'courses/:courseId', component: CourseComponent, canActivate: [AuthGuard] },
-  { path: 'courses/:courseId/edit', component: EditCourseComponent, canActivate: [AuthGuard] },
+  {
+    path: 'courses',
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Courses' },
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: CoursesComponent,
+      },
+      {
+        path: 'new',
+        component: AddCourseComponent,
+        data: { breadcrumb: 'New' },
+      },
+      {
+        path: ':courseId',
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            component: CourseComponent,
+          },
+          {
+            path: 'edit',
+            component: EditCourseComponent,
+            data: { breadcrumb: 'Edit' },
+          }
+        ]
+      },
+    ]
+  },
   { path: '404', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/404' },
 ];
