@@ -25,7 +25,9 @@ export class AddCourseComponent {
   ) {}
 
   onSaveCourse(course: CourseUpdate): void {
-    this._coursesService.addCourse({...course, id: Date.now().toString()});
-    this._router.navigate(['../']);
+    this._coursesService.addCourse({...course, id: Date.now().toString()})
+      .subscribe(() => {
+        this._router.navigate(['../']);
+      });
   }
 }

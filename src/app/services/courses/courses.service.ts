@@ -28,8 +28,8 @@ export class CoursesService {
     });
   }
 
-  addCourse(course: ICourse): void {
-    this._courses.push(course);
+  addCourse(course: ICourse): Observable<any> {
+    return this._http.post('courses', {...course});
   }
 
   getCourse(id: string): ICourse | undefined {
