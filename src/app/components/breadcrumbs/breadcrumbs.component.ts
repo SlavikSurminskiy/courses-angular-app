@@ -41,7 +41,9 @@ export class BreadcrumbsComponent implements OnInit {
       const courseId = route.snapshot.params[paramName];
 
       path = path.replace(lastRoutePart, courseId);
-      label = this._coursesService.getCourse(courseId)?.name;
+      // to do show course name instead of id
+      label = courseId;
+      // label = this._coursesService.getCourse(courseId)?.name;
     }
 
     const nextUrl = path ? `${url}/${path}` : url;
