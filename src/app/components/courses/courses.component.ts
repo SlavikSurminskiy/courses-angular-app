@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { switchMap } from 'rxjs/operators';
 
 import { ICourse } from '../../shared/models/course.model';
 import { CoursesService } from '../../services/courses/courses.service';
@@ -49,10 +50,13 @@ export class CoursesComponent implements OnInit {
       data: {...course},
     }).afterClosed().subscribe((deleteCourse: boolean) => {
       if (deleteCourse) {
-        this._coursesService.deleteCourse(courseId);
-        this._coursesService.getCourses().subscribe((courses) => {
-          this.courses = courses;
-        });
+        this._coursesService.deleteCourse(courseId)
+          .pipe(
+            switchMap(() => this._coursesService.getCourses()),
+          )
+          .subscribe((courses) => {
+            this.courses = courses;
+          });
       }
     });
   }

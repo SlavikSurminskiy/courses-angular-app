@@ -41,7 +41,7 @@ export class CoursesService {
     Object.assign(target, data);
   }
 
-  deleteCourse(id: string): void {
-    this._courses = this._courses.filter((course) => course.id !== id);
+  deleteCourse(id: string): Observable<any> {
+    return this._http.delete(`courses/${id}`);
   }
 }
