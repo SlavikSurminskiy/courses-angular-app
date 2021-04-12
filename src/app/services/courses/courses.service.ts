@@ -22,6 +22,12 @@ export class CoursesService {
     });
   }
 
+  searchCourses(searchQuery = ''): Observable<ICourse[]> {
+    return this._http.get<ICourse[]>('courses', {
+      params: new HttpParams().set('textFragment', searchQuery)
+    });
+  }
+
   addCourse(course: ICourse): void {
     this._courses.push(course);
   }

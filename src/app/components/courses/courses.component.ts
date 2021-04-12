@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { ICourse } from '../../shared/models/course.model';
 import { CoursesService } from '../../services/courses/courses.service';
-import { CoursesFilterPipe } from '../../pipes/courses-filter/courses-filter.pipe';
 
 import { DeleteCourseDialogComponent } from '../delete-course-dialog/delete-course-dialog.component';
 
@@ -12,7 +11,6 @@ import { DeleteCourseDialogComponent } from '../delete-course-dialog/delete-cour
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [CoursesFilterPipe],
 })
 export class CoursesComponent implements OnInit {
   searchQuery = '';
@@ -24,7 +22,6 @@ export class CoursesComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
     private _coursesService: CoursesService,
-    private _courseFilter: CoursesFilterPipe,
   ) {}
 
   ngOnInit(): void {
@@ -34,9 +31,10 @@ export class CoursesComponent implements OnInit {
   }
 
   onSearch(): void {
-    this._coursesService.getCourses().subscribe((courses) => {
-      this.courses = this._courseFilter.transform(courses, this.searchQuery);
-    });
+    this._coursesService.searchCourses(this.searchQuery)
+      .subscribe((courses) => {
+        this.courses = courses;
+      });
   }
 
   onEdit(courseId: string): void {
