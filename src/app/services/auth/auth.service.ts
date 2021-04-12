@@ -14,14 +14,19 @@ export class AuthService {
     id: '01',
   };
 
-  login(user: AuthUser): void {
-    localStorage.setItem(this.LS_USER, JSON.stringify({
-      ...this.fakeUser,
-      email: user.email,
-      token: `${user.password}-token`,
-    }));
+  login(user: AuthUser): boolean {
+    if (user.email === 'admin' && user.password === '1234') {
+      localStorage.setItem(this.LS_USER, JSON.stringify({
+        ...this.fakeUser,
+        email: user.email,
+        token: `${user.password}-token`,
+      }));
 
-    console.log('Logged in');
+      console.log('Logged in');
+      return true;
+    }
+    console.log('Wrong email or password');
+    return false;
   }
 
   logout(): void {

@@ -1,19 +1,52 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from './auth/auth.guard';
+
 import { LoginComponent } from './components/login/login.component';
 import { CourseComponent } from './components/course/course.component';
 import { CoursesComponent } from './components/courses/courses.component';
 import { AddCourseComponent } from './components/add-course/add-course.component';
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'courses', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'courses', component: CoursesComponent },
-  { path: 'courses/new', component: AddCourseComponent },
-  { path: 'courses/:courseId', component: CourseComponent },
-  { path: 'courses/:courseId/edit', component: EditCourseComponent },
+  {
+    path: 'courses',
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Courses' },
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: CoursesComponent,
+      },
+      {
+        path: 'new',
+        component: AddCourseComponent,
+        data: { breadcrumb: 'New' },
+      },
+      {
+        path: ':courseId',
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            component: CourseComponent,
+          },
+          {
+            path: 'edit',
+            component: EditCourseComponent,
+            data: { breadcrumb: 'Edit' },
+          }
+        ]
+      },
+    ]
+  },
+  { path: '404', component: PageNotFoundComponent },
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -8,9 +9,17 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(private _auth: AuthService) {}
+  constructor(
+    private _router: Router,
+    private _auth: AuthService,
+  ) {}
+
+  get isLogin(): boolean {
+    return this._auth.isAuthenticated();
+  }
 
   onLogout(): void {
     this._auth.logout();
+    this._router.navigate(['login']);
   }
 }

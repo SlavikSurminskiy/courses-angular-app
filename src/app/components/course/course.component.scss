@@ -1,0 +1,20 @@
+.course {
+  margin-top: 20px;
+
+  &__description {
+    margin: 20px 0;
+  }
+
+  &__info {
+    margin-top: 10px;
+
+    p {
+      display: flex;
+      align-items: center;
+    }
+
+    mat-icon {
+      margin-right: 10px;
+    }
+  }
+}

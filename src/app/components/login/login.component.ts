@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
@@ -7,15 +9,22 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  email =  '';
+  email = '';
   password = '';
 
-  constructor(private _auth: AuthService) { }
+  constructor(
+    private _auth: AuthService,
+    private _router: Router,
+  ) { }
 
   onLogin(): void {
-    this._auth.login({
+    const isLogin = this._auth.login({
       email: this.email,
       password: this.password
     });
+
+    if (isLogin) {
+      this._router.navigate(['courses']);
+    }
   }
 }

@@ -17,6 +17,7 @@ import { CourseCardComponent } from './components/course-card/course-card.compon
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
 import { CourseFormComponent } from './components/course-form/course-form.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DeleteCourseDialogComponent } from './components/delete-course-dialog/delete-course-dialog.component';
 
 // directives
@@ -32,6 +33,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -48,6 +50,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CourseFormComponent,
     EditCourseComponent,
     BreadcrumbsComponent,
+    PageNotFoundComponent,
     DeleteCourseDialogComponent,
     CourseCardCreationDateDirective,
     CourseDurationPipe,
@@ -61,6 +64,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatDividerModule,
     MatSidenavModule,
     MatDialogModule,
     BrowserAnimationsModule
