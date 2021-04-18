@@ -18,7 +18,7 @@ export class CourseComponent implements OnInit {
 
   course: ICourse = {
     id: '',
-    title: '',
+    name: '',
     duration: 0,
     topRated: false,
     description: '',
@@ -27,12 +27,12 @@ export class CourseComponent implements OnInit {
 
   ngOnInit(): void {
     const { courseId } = this._route.snapshot.params;
-    const course = this._coursesService.getCourse(courseId);
 
-    if (course) {
-      this.course = course;
-    } else {
-      this._router.navigate(['../']);
-    }
+    this._coursesService.getCourse(courseId)
+      .subscribe((course) => {
+        this.course = course;
+      }, () => {
+        this._router.navigate(['../']);
+      });
   }
 }

@@ -12,7 +12,7 @@ import { CourseUpdate, ICourse } from '../../shared/models/course.model';
 export class EditCourseComponent implements OnInit {
   course: ICourse = {
     id: '',
-    title: '',
+    name: '',
     duration: 0,
     topRated: false,
     description: '',
@@ -29,17 +29,18 @@ export class EditCourseComponent implements OnInit {
 
   ngOnInit(): void {
     this._courseId = this._route.snapshot.params.courseId;
-    const course = this._coursesService.getCourse(this._courseId);
 
-    if (course) {
-      this.course = course;
-    } else {
-      this._router.navigate(['../']);
-    }
+    this._coursesService.getCourse(this._courseId)
+      .subscribe((course) => {
+        this.course = course;
+      }, () => {
+        this._router.navigate(['../']);
+      });
   }
 
   onSaveCourse(course: CourseUpdate): void {
-    this._coursesService.updateCourse(this._courseId, course);
-    this._router.navigate(['../']);
+    this._coursesService.updateCourse(this._courseId, course).subscribe(() => {
+      this._router.navigate(['../']);
+    });
   }
 }

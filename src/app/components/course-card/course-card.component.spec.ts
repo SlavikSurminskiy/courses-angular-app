@@ -53,7 +53,7 @@ describe('CourseCardComponent', () => {
 
     const course: ICourse = {
       id: '1',
-      title: '',
+      name: '',
       creationDate: '',
       duration: 0,
       topRated: false,
@@ -71,7 +71,7 @@ describe('CourseCardComponent', () => {
 
     const course: ICourse = {
       id: '1',
-      title: '',
+      name: '',
       creationDate: '',
       duration: 0,
       topRated: false,

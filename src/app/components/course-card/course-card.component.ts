@@ -11,7 +11,7 @@ import { ICourse } from '../../shared/models/course.model';
 export class CourseCardComponent {
   @Input() course: ICourse = {
     id: '',
-    title: '',
+    name: '',
     creationDate: '',
     duration: 0,
     topRated: false,

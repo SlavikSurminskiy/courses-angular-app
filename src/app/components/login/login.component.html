@@ -24,6 +24,7 @@
       >
     </mat-form-field>
   </p>
+  <p *ngIf="errorMessage">{{errorMessage}}</p>
   <div class="login-form__footer">
     <a href="">Forgot password?</a>
     <button type="submit" mat-raised-button color="primary">Login</button>

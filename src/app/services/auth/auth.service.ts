@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { IUser } from '../../shared/models/user.model';
-import { AuthUser } from './auth.models';
+import { HttpClient,  } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { AuthUser, LoginResponse, UserInfo } from './auth.models';
 
 @Injectable({
   providedIn: 'root'
@@ -8,29 +10,16 @@ import { AuthUser } from './auth.models';
 export class AuthService {
   private LS_USER = 'USER';
 
-  private fakeUser: IUser = {
-    firstName: 'test-first-name',
-    lastName: 'test-last-name',
-    id: '01',
-  };
+  constructor(private _http: HttpClient) {}
 
-  login(user: AuthUser): boolean {
-    if (user.email === 'admin' && user.password === '1234') {
-      localStorage.setItem(this.LS_USER, JSON.stringify({
-        ...this.fakeUser,
-        email: user.email,
-        token: `${user.password}-token`,
-      }));
-
-      console.log('Logged in');
-      return true;
-    }
-    console.log('Wrong email or password');
-    return false;
+  login(user: AuthUser): Observable<LoginResponse> {
+    return this._http.post<LoginResponse>('auth/login', {
+      login: user.email,
+      password: user.password
+    });
   }
 
   logout(): void {
-    console.log('Logout ', this.getUserInfo().firstName);
     localStorage.removeItem(this.LS_USER);
   }
 
@@ -38,9 +27,17 @@ export class AuthService {
     return localStorage.getItem(this.LS_USER) !== null;
   }
 
-  getUserInfo(): IUser {
-    const user = localStorage.getItem(this.LS_USER);
+  getUserInfo(): Observable<UserInfo> {
+    return this._http.post<UserInfo>('auth/userinfo', {
+      token: this.getToken(),
+    });
+  }
 
-    return user ? JSON.parse(user) : {};
+  getToken(): string {
+    return localStorage.getItem(this.LS_USER) || '';
+  }
+
+  saveToken(token: string): void {
+    localStorage.setItem(this.LS_USER, token);
   }
 }

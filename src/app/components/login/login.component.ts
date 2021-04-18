@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth/auth.service';
 export class LoginComponent {
   email = '';
   password = '';
+  errorMessage = '';
 
   constructor(
     private _auth: AuthService,
@@ -18,13 +19,14 @@ export class LoginComponent {
   ) { }
 
   onLogin(): void {
-    const isLogin = this._auth.login({
+    this._auth.login({
       email: this.email,
       password: this.password
-    });
-
-    if (isLogin) {
+    }).subscribe(({token}) => {
+      this._auth.saveToken(token);
       this._router.navigate(['courses']);
-    }
+    }, (err) => {
+      this.errorMessage = err.error;
+    });
   }
 }

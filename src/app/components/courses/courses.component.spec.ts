@@ -20,7 +20,7 @@ const CoursesServiceStub = {
     return [
       {
         id: '01',
-        title: 'Video Course 1. Name tag',
+        name: 'Video Course 1. Name tag',
         creationDate: '2022-10-05T14:48:00.000Z',
         duration: 65,
         topRated: false,
@@ -28,7 +28,7 @@ const CoursesServiceStub = {
       },
       {
         id: '02',
-        title: 'Video Course 2. Name tag',
+        name: 'Video Course 2. Name tag',
         creationDate: '2022-10-05T14:48:00.000Z',
         duration: 65,
         topRated: false,
