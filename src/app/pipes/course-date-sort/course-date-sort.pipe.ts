@@ -12,8 +12,8 @@ export class CourseDateSortPipe implements PipeTransform {
     const multiplier = order === 'new' ? -1 : 1;
 
     courses.sort((a, b) => {
-      const d1 = moment(a.creationDate);
-      const d2 = moment(b.creationDate);
+      const d1 = moment(a.date);
+      const d2 = moment(b.date);
 
       if (d1 > d2) {
         return 1 * multiplier;

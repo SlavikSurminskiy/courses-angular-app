@@ -22,7 +22,7 @@ export class CourseComponent implements OnInit {
     duration: 0,
     topRated: false,
     description: '',
-    creationDate: '',
+    date: '',
   };
 
   ngOnInit(): void {

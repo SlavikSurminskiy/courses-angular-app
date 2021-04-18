@@ -21,7 +21,7 @@ export class CourseFormComponent {
       name: this.title,
       duration: this.duration,
       description: this.description,
-      creationDate: this.creationDate,
+      date: this.creationDate,
       topRated: false,
     });
   }

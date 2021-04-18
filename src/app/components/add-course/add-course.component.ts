@@ -16,7 +16,7 @@ export class AddCourseComponent {
     duration: 0,
     topRated: false,
     description: '',
-    creationDate: '',
+    date: '',
   };
 
   constructor(

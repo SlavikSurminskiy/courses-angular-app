@@ -16,7 +16,7 @@ export class EditCourseComponent implements OnInit {
     duration: 0,
     topRated: false,
     description: '',
-    creationDate: '',
+    date: '',
   };
 
   private _courseId = '';

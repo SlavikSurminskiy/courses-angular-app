@@ -1,6 +1,6 @@
 <div
   class="course-card"
-  [appCourseCardCreationDate]="course.creationDate"
+  [appCourseCardCreationDate]="course.date"
   [ngClass]="{'course-card--top-rated': course.topRated}"
 >
   <div class="course-card__description">
@@ -18,7 +18,7 @@
   <div class="course-card__actions">
     <div class="duration">
       <span><mat-icon>schedule</mat-icon>{{course.duration | courseDuration}}</span>
-      <span><mat-icon>date_range</mat-icon>{{course.creationDate |  date:'short'}}</span>
+      <span><mat-icon>date_range</mat-icon>{{course.date | date:'short'}}</span>
     </div>
     <div class="actions">
       <a [routerLink]="[course.id, 'edit']" mat-raised-button color="accent">
