@@ -1,6 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { switchMap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import {
+  filter,
+  switchMap,
+  debounceTime,
+  distinctUntilChanged,
+} from 'rxjs/operators';
 
 import { ICourse } from '../../shared/models/course.model';
 import { CoursesService } from '../../services/courses/courses.service';
@@ -15,6 +21,7 @@ import { DeleteCourseDialogComponent } from '../delete-course-dialog/delete-cour
 })
 export class CoursesComponent implements OnInit {
   searchQuery = '';
+  searchQuery$ = new Subject<string>();
   courses: ICourse[] = [];
 
   private COURSES_PER_PAGE = 10;
@@ -29,13 +36,24 @@ export class CoursesComponent implements OnInit {
     this._coursesService.getCourses().subscribe((courses) => {
       this.courses = courses;
     });
+
+    this.searchQuery$.pipe(
+      filter((v) => v.length > 2 || v === ''),
+      debounceTime(250),
+      distinctUntilChanged(),
+      switchMap((search) => {
+        return this._coursesService.searchCourses(search);
+      })
+    ).subscribe((courses) => {
+      this.courses = courses;
+    });
   }
 
-  onSearch(): void {
-    this._coursesService.searchCourses(this.searchQuery)
-      .subscribe((courses) => {
-        this.courses = courses;
-      });
+  onSearch(event: KeyboardEvent): void {
+    const { value } = event.target as HTMLInputElement;
+
+    this.searchQuery = value;
+    this.searchQuery$.next(value);
   }
 
   onEdit(courseId: string): void {
