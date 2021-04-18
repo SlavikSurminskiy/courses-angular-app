@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import {
   filter,
   switchMap,
@@ -19,13 +19,14 @@ import { DeleteCourseDialogComponent } from '../delete-course-dialog/delete-cour
   styleUrls: ['./courses.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, OnDestroy {
   searchQuery = '';
   searchQuery$ = new Subject<string>();
   courses: ICourse[] = [];
 
   private COURSES_PER_PAGE = 10;
   private currentPage = 1;
+  private _subscriptions: Subscription[] = [];
 
   constructor(
     private _dialog: MatDialog,
@@ -37,7 +38,7 @@ export class CoursesComponent implements OnInit {
       this.courses = courses;
     });
 
-    this.searchQuery$.pipe(
+    const subscription = this.searchQuery$.pipe(
       filter((v) => v.length > 2 || v === ''),
       debounceTime(250),
       distinctUntilChanged(),
@@ -47,6 +48,8 @@ export class CoursesComponent implements OnInit {
     ).subscribe((courses) => {
       this.courses = courses;
     });
+
+    this._subscriptions.push(subscription);
   }
 
   onSearch(event: KeyboardEvent): void {
@@ -83,9 +86,15 @@ export class CoursesComponent implements OnInit {
     this.currentPage++;
     const count = (this.currentPage * this.COURSES_PER_PAGE).toString();
 
-    this._coursesService.getCourses({start: '0', count})
+    const subscription = this._coursesService.getCourses({start: '0', count})
       .subscribe((courses) => {
         this.courses = courses;
       });
+
+    this._subscriptions.push(subscription);
+  }
+
+  ngOnDestroy(): void {
+    this._subscriptions.forEach((sub) => sub.unsubscribe());
   }
 }
