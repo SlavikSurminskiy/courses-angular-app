@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { CoursesService } from '../../services/courses/courses.service';
+import { LoadingService } from '../../services/loading/loading.service';
 import { CourseUpdate, ICourse } from '../../shared/models/course.model';
 
 @Component({
@@ -25,11 +26,16 @@ export class AddCourseComponent implements OnDestroy {
   constructor(
     private _router: Router,
     private _coursesService: CoursesService,
+    private _loadingServise: LoadingService,
   ) {}
 
   onSaveCourse(course: CourseUpdate): void {
+    this._loadingServise.showLoader$.next(true);
+
     const subscription = this._coursesService.addCourse({...course, id: Date.now().toString()})
       .subscribe(() => {
+        this._loadingServise.showLoader$.next(false);
+
         this._router.navigate(['../']);
       });
 

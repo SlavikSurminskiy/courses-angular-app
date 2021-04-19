@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { CoursesService } from '../../services/courses/courses.service';
+import { LoadingService } from '../../services/loading/loading.service';
 import { CourseUpdate, ICourse } from '../../shared/models/course.model';
 
 @Component({
@@ -27,6 +28,7 @@ export class EditCourseComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _route: ActivatedRoute,
     private _coursesService: CoursesService,
+    private _loadingServise: LoadingService,
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +45,11 @@ export class EditCourseComponent implements OnInit, OnDestroy {
   }
 
   onSaveCourse(course: CourseUpdate): void {
+    this._loadingServise.showLoader$.next(true);
+
     this._coursesService.updateCourse(this._courseId, course).subscribe(() => {
+      this._loadingServise.showLoader$.next(false);
+
       this._router.navigate(['../']);
     });
   }

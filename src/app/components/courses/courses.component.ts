@@ -11,6 +11,8 @@ import {
 import { ICourse } from '../../shared/models/course.model';
 import { CoursesService } from '../../services/courses/courses.service';
 
+import { LoadingService } from '../../services/loading/loading.service';
+
 import { DeleteCourseDialogComponent } from '../delete-course-dialog/delete-course-dialog.component';
 
 @Component({
@@ -31,10 +33,15 @@ export class CoursesComponent implements OnInit, OnDestroy {
   constructor(
     private _dialog: MatDialog,
     private _coursesService: CoursesService,
+    private _loadingServise: LoadingService,
   ) {}
 
   ngOnInit(): void {
+    this._loadingServise.showLoader$.next(true);
+
     this._coursesService.getCourses().subscribe((courses) => {
+      this._loadingServise.showLoader$.next(false);
+
       this.courses = courses;
     });
 
@@ -71,11 +78,15 @@ export class CoursesComponent implements OnInit, OnDestroy {
       data: {...course},
     }).afterClosed().subscribe((deleteCourse: boolean) => {
       if (deleteCourse) {
+        this._loadingServise.showLoader$.next(true);
+
         this._coursesService.deleteCourse(courseId)
           .pipe(
             switchMap(() => this._coursesService.getCourses()),
           )
           .subscribe((courses) => {
+            this._loadingServise.showLoader$.next(false);
+
             this.courses = courses;
           });
       }
