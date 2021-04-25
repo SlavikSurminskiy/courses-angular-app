@@ -1,9 +1,17 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { switchMap } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import {
+  filter,
+  switchMap,
+  debounceTime,
+  distinctUntilChanged,
+} from 'rxjs/operators';
 
 import { ICourse } from '../../shared/models/course.model';
 import { CoursesService } from '../../services/courses/courses.service';
+
+import { LoadingService } from '../../services/loading/loading.service';
 
 import { DeleteCourseDialogComponent } from '../delete-course-dialog/delete-course-dialog.component';
 
@@ -13,29 +21,49 @@ import { DeleteCourseDialogComponent } from '../delete-course-dialog/delete-cour
   styleUrls: ['./courses.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, OnDestroy {
   searchQuery = '';
+  searchQuery$ = new Subject<string>();
   courses: ICourse[] = [];
 
   private COURSES_PER_PAGE = 10;
   private currentPage = 1;
+  private _subscriptions: Subscription[] = [];
 
   constructor(
     private _dialog: MatDialog,
     private _coursesService: CoursesService,
+    private _loadingServise: LoadingService,
   ) {}
 
   ngOnInit(): void {
+    this._loadingServise.showLoader$.next(true);
+
     this._coursesService.getCourses().subscribe((courses) => {
+      this._loadingServise.showLoader$.next(false);
+
       this.courses = courses;
     });
+
+    const subscription = this.searchQuery$.pipe(
+      filter((v) => v.length > 2 || v === ''),
+      debounceTime(250),
+      distinctUntilChanged(),
+      switchMap((search) => {
+        return this._coursesService.searchCourses(search);
+      })
+    ).subscribe((courses) => {
+      this.courses = courses;
+    });
+
+    this._subscriptions.push(subscription);
   }
 
-  onSearch(): void {
-    this._coursesService.searchCourses(this.searchQuery)
-      .subscribe((courses) => {
-        this.courses = courses;
-      });
+  onSearch(event: KeyboardEvent): void {
+    const { value } = event.target as HTMLInputElement;
+
+    this.searchQuery = value;
+    this.searchQuery$.next(value);
   }
 
   onEdit(courseId: string): void {
@@ -50,11 +78,15 @@ export class CoursesComponent implements OnInit {
       data: {...course},
     }).afterClosed().subscribe((deleteCourse: boolean) => {
       if (deleteCourse) {
+        this._loadingServise.showLoader$.next(true);
+
         this._coursesService.deleteCourse(courseId)
           .pipe(
             switchMap(() => this._coursesService.getCourses()),
           )
           .subscribe((courses) => {
+            this._loadingServise.showLoader$.next(false);
+
             this.courses = courses;
           });
       }
@@ -65,9 +97,15 @@ export class CoursesComponent implements OnInit {
     this.currentPage++;
     const count = (this.currentPage * this.COURSES_PER_PAGE).toString();
 
-    this._coursesService.getCourses({start: '0', count})
+    const subscription = this._coursesService.getCourses({start: '0', count})
       .subscribe((courses) => {
         this.courses = courses;
       });
+
+    this._subscriptions.push(subscription);
+  }
+
+  ngOnDestroy(): void {
+    this._subscriptions.forEach((sub) => sub.unsubscribe());
   }
 }

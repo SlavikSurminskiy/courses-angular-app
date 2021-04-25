@@ -1,6 +1,6 @@
 <div class="courses">
   <div class="courses__search">
-    <form (ngSubmit)="onSearch()">
+    <form>
       <mat-form-field appearance="outline">
         <mat-label>Search courses</mat-label>
         <input
@@ -8,11 +8,11 @@
           type="text"
           name="search"
           placeholder="Search"
-          [(ngModel)]="searchQuery"
+          [value]="searchQuery"
+          (keyup)="onSearch($event)"
         >
-        <mat-icon matSuffix (click)="onSearch()">search</mat-icon>
+        <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
-      <button type="submit" mat-raised-button color="primary">Search</button>
     </form>
   </div>
 

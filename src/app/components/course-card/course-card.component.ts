@@ -12,7 +12,7 @@ export class CourseCardComponent {
   @Input() course: ICourse = {
     id: '',
     name: '',
-    creationDate: '',
+    date: '',
     duration: 0,
     topRated: false,
     description: '',
