@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
-import { AuthService } from '../../services/auth/auth.service';
-import { LoadingService } from '../../services/loading/loading.service';
+import { login } from '../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -14,25 +13,12 @@ export class LoginComponent {
   password = '';
   errorMessage = '';
 
-  constructor(
-    private _auth: AuthService,
-    private _router: Router,
-    private _loadingServise: LoadingService,
-  ) { }
+  constructor(private store: Store) { }
 
   onLogin(): void {
-    this._loadingServise.showLoader$.next(true);
-
-    this._auth.login({
+    this.store.dispatch(login({
       email: this.email,
-      password: this.password
-    }).subscribe(({token}) => {
-      this._loadingServise.showLoader$.next(false);
-
-      this._auth.saveToken(token);
-      this._router.navigate(['courses']);
-    }, (err) => {
-      this.errorMessage = err.error;
-    });
+      password: this.password,
+    }));
   }
 }
