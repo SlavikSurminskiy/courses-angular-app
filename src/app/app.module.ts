@@ -12,6 +12,9 @@ import { environment } from '../environments/environment';
 import { AuthReducer } from './store/auth/auth.reducer';
 import { AuthEffects } from './store/auth/auth.effects';
 
+import { CoursesReducer } from './store/courses/courses.reducer';
+import { CoursesEffects } from './store/courses/courses.effects';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -84,9 +87,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressSpinnerModule,
     StoreModule.forRoot({
       auth: AuthReducer,
+      courses: CoursesReducer,
     }),
     EffectsModule.forRoot([
       AuthEffects,
+      CoursesEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
