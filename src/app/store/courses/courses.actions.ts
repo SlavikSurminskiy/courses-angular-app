@@ -1,7 +1,33 @@
 import { createAction, props } from '@ngrx/store';
 
-export const loadCourses = createAction('[COURSES] LOAD');
-export const loadCoursesComplete = createAction('[COURSES] LOAD_SUCCESS', props<any>());
+import { ICourse } from '../../shared/models/course.model';
 
-export const searchCourses = createAction('[COURSES] SEARCH', props<any>());
-export const searchCoursesComplete = createAction('[COURSES] SEARCH_SUCCESS', props<any>());
+export const loadCourses = createAction(
+  '[COURSES] LOAD COURSES',
+  props<{ start: string; count: string }>(),
+);
+
+export const loadCoursesSuccess = createAction(
+  '[COURSES] LOAD COURSES SUCCESS',
+  props<{ courses: ICourse[] }>(),
+);
+
+export const searchCourses = createAction(
+  '[COURSES] SEARCH COURSES',
+  props<{ search: string }>(),
+);
+
+export const searchCoursesSuccess = createAction(
+  '[COURSES] SEARCH COURSES SUCCESS',
+  props<{ courses: ICourse[] }>(),
+);
+
+export const deleteCourse = createAction(
+  '[COURSES] DELETE COURSE',
+  props<{ courseId: string }>(),
+);
+
+export const deleteCourseSuccess = createAction(
+  '[COURSES] DELETE COURSE SUCCESS',
+  props<{ courseId: string }>(),
+);

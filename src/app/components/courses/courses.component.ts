@@ -3,18 +3,16 @@ import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, Subscription } from 'rxjs';
 import {
+  tap,
   filter,
-  switchMap,
   debounceTime,
   distinctUntilChanged,
 } from 'rxjs/operators';
 
-import { loadCourses } from '../../store/courses/courses.actions';
+import { loadCourses, searchCourses, deleteCourse } from '../../store/courses/courses.actions';
 
 import { ICourse } from '../../shared/models/course.model';
 import { CoursesService } from '../../services/courses/courses.service';
-
-import { LoadingService } from '../../services/loading/loading.service';
 
 import { DeleteCourseDialogComponent } from '../delete-course-dialog/delete-course-dialog.component';
 
@@ -36,14 +34,16 @@ export class CoursesComponent implements OnInit, OnDestroy {
   constructor(
     private _dialog: MatDialog,
     private _coursesService: CoursesService,
-    private _loadingServise: LoadingService,
     private store: Store<any>,
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(loadCourses());
+    this.store.dispatch(loadCourses({
+      start: '0',
+      count: '10',
+    }));
 
-    this.store.select((state) => state.courses).subscribe(({courses}) => {
+    this.store.select((state) => state.courses).subscribe(({ courses }) => {
       this.courses = courses;
     });
 
@@ -51,12 +51,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
       filter((v) => v.length > 2 || v === ''),
       debounceTime(250),
       distinctUntilChanged(),
-      switchMap((search) => {
-        return this._coursesService.searchCourses(search);
-      })
-    ).subscribe((courses) => {
-      this.courses = courses;
-    });
+      tap((search) => this.store.dispatch(searchCourses({ search })))
+    ).subscribe();
 
     this._subscriptions.push(subscription);
   }
@@ -78,33 +74,17 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this._dialog.open(DeleteCourseDialogComponent, {
       minWidth: 500,
       data: {...course},
-    }).afterClosed().subscribe((deleteCourse: boolean) => {
-      if (deleteCourse) {
-        this._loadingServise.showLoader$.next(true);
-
-        this._coursesService.deleteCourse(courseId)
-          .pipe(
-            switchMap(() => this._coursesService.getCourses()),
-          )
-          .subscribe((courses) => {
-            this._loadingServise.showLoader$.next(false);
-
-            this.courses = courses;
-          });
-      }
-    });
+    }).afterClosed().pipe(
+      filter(value => value),
+      tap(() => this.store.dispatch(deleteCourse({ courseId }))),
+    ).subscribe();
   }
 
   onLoadMore(): void {
     this.currentPage++;
     const count = (this.currentPage * this.COURSES_PER_PAGE).toString();
 
-    const subscription = this._coursesService.getCourses({start: '0', count})
-      .subscribe((courses) => {
-        this.courses = courses;
-      });
-
-    this._subscriptions.push(subscription);
+    this.store.dispatch(loadCourses({ start: '0', count }));
   }
 
   ngOnDestroy(): void {
