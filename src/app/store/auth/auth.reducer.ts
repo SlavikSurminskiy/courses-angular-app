@@ -9,8 +9,11 @@ const authReducerCreator = createReducer(
   on(AuthActions.login, (state) => {
     return { ...state, loading: true };
   }),
-  on(AuthActions.loginComplete, (state, action) => {
+  on(AuthActions.loginSuccess, (state, action) => {
     return { ...state, user: action, loading: false };
+  }),
+  on(AuthActions.logout, (state) => {
+    return { ...state, user: null };
   }),
 );
 

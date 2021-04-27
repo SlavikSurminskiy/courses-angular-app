@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import { logout } from '../../store/auth/auth.actions';
 
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -12,6 +15,7 @@ export class HeaderComponent {
   constructor(
     private _router: Router,
     private _auth: AuthService,
+    private store: Store,
   ) {}
 
   get isLogin(): boolean {
@@ -21,5 +25,6 @@ export class HeaderComponent {
   onLogout(): void {
     this._auth.logout();
     this._router.navigate(['login']);
+    this.store.dispatch(logout());
   }
 }
