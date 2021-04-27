@@ -23,18 +23,18 @@
   </div>
 
   <app-course-card
-    *ngFor="let course of courses"
+    *ngFor="let course of courses$ | async"
     [course]="course"
     (edit)="onEdit($event)"
     (delete)="onDelete($event)"
   ></app-course-card>
 
-  <div class="courses__load-more" *ngIf="courses.length > 0; else noCourses">
+  <div class="courses__load-more" *ngIf="(courses$ | async)!.length > 0; else noCourses">
     <button (click)="onLoadMore()">Load More</button>
   </div>
 
   <ng-template #noCourses>
-    <div class="courses__no-cousrses">
+    <div class="courses__no-courses">
       No Data. Feel free to add new course
     </div>
   </ng-template>
