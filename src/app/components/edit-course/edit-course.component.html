@@ -1,4 +1,5 @@
 <app-course-form
+  *ngIf="course.id"
   headline="Edit course"
   [title]="course.name"
   [description]="course.description"
