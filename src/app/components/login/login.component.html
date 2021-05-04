@@ -1,4 +1,4 @@
-<form (ngSubmit)="onLogin()" class="login-form">
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
   <h1>Login</h1>
   <p>
     <mat-form-field appearance="outline">
@@ -8,8 +8,11 @@
         type="text"
         name="email"
         placeholder="Enter e-mail"
-        [(ngModel)]="email"
+        formControlName="email"
       >
+      <mat-error *ngIf="loginForm.get('email')?.invalid">
+        Enter valid email
+      </mat-error>
     </mat-form-field>
   </p>
   <p>
@@ -20,14 +23,23 @@
         type="password"
         name="email"
         placeholder="Enter password"
-        [(ngModel)]="password"
+        formControlName="password"
       >
+      <mat-error *ngIf="loginForm.get('password')?.invalid">
+        Password shoud be at least 6 characters
+      </mat-error>
     </mat-form-field>
   </p>
-  <p *ngIf="errorMessage">{{errorMessage}}</p>
   <div class="login-form__footer">
     <a href="">Forgot password?</a>
-    <button type="submit" mat-raised-button color="primary">Login</button>
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="!loginForm.valid"
+    >
+      Login
+    </button>
   </div>
 </form>
 

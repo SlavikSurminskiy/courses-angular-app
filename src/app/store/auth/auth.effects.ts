@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
 import { map, catchError, exhaustMap } from 'rxjs/operators';
@@ -31,7 +32,11 @@ export class AuthEffects {
               }
             });
           }),
-          catchError(() => EMPTY)
+          catchError((err) => {
+            this._snackBar.open(err.error || 'Something went wrong, please try later', 'Close');
+
+            return EMPTY;
+          })
         );
       })
     );
@@ -41,5 +46,6 @@ export class AuthEffects {
     private _actions$: Actions,
     private _authService: AuthService,
     private _router: Router,
+    private _snackBar: MatSnackBar,
   ) {}
 }
