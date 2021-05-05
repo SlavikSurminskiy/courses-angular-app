@@ -8,7 +8,7 @@ export interface LoginResponse {
 }
 
 export interface UserInfo {
-  id: number;
+  id: string;
   token: string;
   name: {
     first: string;

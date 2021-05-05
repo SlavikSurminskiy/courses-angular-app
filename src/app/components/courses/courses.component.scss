@@ -42,7 +42,7 @@
     }
   }
 
-  &__no-cousrses {
+  &__no-courses {
     @include course-card-style();
     text-align: center;
     text-transform: uppercase;

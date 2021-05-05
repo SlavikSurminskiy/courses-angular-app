@@ -4,6 +4,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+
+import { AuthReducer } from './store/auth/auth.reducer';
+import { AuthEffects } from './store/auth/auth.effects';
+
+import { CoursesReducer } from './store/courses/courses.reducer';
+import { CoursesEffects } from './store/courses/courses.effects';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -73,7 +84,19 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSidenavModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    StoreModule.forRoot({
+      auth: AuthReducer,
+      courses: CoursesReducer,
+    }),
+    EffectsModule.forRoot([
+      AuthEffects,
+      CoursesEffects,
+    ]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [
     {

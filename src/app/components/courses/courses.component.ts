@@ -1,17 +1,20 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
-import { Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import {
+  tap,
   filter,
-  switchMap,
   debounceTime,
   distinctUntilChanged,
 } from 'rxjs/operators';
 
-import { ICourse } from '../../shared/models/course.model';
-import { CoursesService } from '../../services/courses/courses.service';
+import { loadCourses, searchCourses, deleteCourse } from '../../store/courses/courses.actions';
 
-import { LoadingService } from '../../services/loading/loading.service';
+import { ICourse } from '../../shared/models/course.model';
+import { StoreState } from '../../store/store.models';
+
+import { CoursesService } from '../../services/courses/courses.service';
 
 import { DeleteCourseDialogComponent } from '../delete-course-dialog/delete-course-dialog.component';
 
@@ -24,7 +27,7 @@ import { DeleteCourseDialogComponent } from '../delete-course-dialog/delete-cour
 export class CoursesComponent implements OnInit, OnDestroy {
   searchQuery = '';
   searchQuery$ = new Subject<string>();
-  courses: ICourse[] = [];
+  courses$: Observable<ICourse[]>;
 
   private COURSES_PER_PAGE = 10;
   private currentPage = 1;
@@ -33,28 +36,23 @@ export class CoursesComponent implements OnInit, OnDestroy {
   constructor(
     private _dialog: MatDialog,
     private _coursesService: CoursesService,
-    private _loadingServise: LoadingService,
-  ) {}
+    private store: Store<StoreState>,
+  ) {
+    this.courses$ = this.store.select((state) => state.courses.courses);
+  }
 
   ngOnInit(): void {
-    this._loadingServise.showLoader$.next(true);
-
-    this._coursesService.getCourses().subscribe((courses) => {
-      this._loadingServise.showLoader$.next(false);
-
-      this.courses = courses;
-    });
+    this.store.dispatch(loadCourses({
+      start: '0',
+      count: '10',
+    }));
 
     const subscription = this.searchQuery$.pipe(
       filter((v) => v.length > 2 || v === ''),
       debounceTime(250),
       distinctUntilChanged(),
-      switchMap((search) => {
-        return this._coursesService.searchCourses(search);
-      })
-    ).subscribe((courses) => {
-      this.courses = courses;
-    });
+      tap((search) => this.store.dispatch(searchCourses({ search })))
+    ).subscribe();
 
     this._subscriptions.push(subscription);
   }
@@ -76,33 +74,17 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this._dialog.open(DeleteCourseDialogComponent, {
       minWidth: 500,
       data: {...course},
-    }).afterClosed().subscribe((deleteCourse: boolean) => {
-      if (deleteCourse) {
-        this._loadingServise.showLoader$.next(true);
-
-        this._coursesService.deleteCourse(courseId)
-          .pipe(
-            switchMap(() => this._coursesService.getCourses()),
-          )
-          .subscribe((courses) => {
-            this._loadingServise.showLoader$.next(false);
-
-            this.courses = courses;
-          });
-      }
-    });
+    }).afterClosed().pipe(
+      filter(value => value),
+      tap(() => this.store.dispatch(deleteCourse({ courseId }))),
+    ).subscribe();
   }
 
   onLoadMore(): void {
     this.currentPage++;
     const count = (this.currentPage * this.COURSES_PER_PAGE).toString();
 
-    const subscription = this._coursesService.getCourses({start: '0', count})
-      .subscribe((courses) => {
-        this.courses = courses;
-      });
-
-    this._subscriptions.push(subscription);
+    this.store.dispatch(loadCourses({ start: '0', count }));
   }
 
   ngOnDestroy(): void {
