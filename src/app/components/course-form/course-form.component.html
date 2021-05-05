@@ -55,6 +55,9 @@
     </mat-form-field>
     {{courseForm.get('duration')?.value | courseDuration}}
   </p>
+  <p>
+    <app-authors-chips formControlName="authors"></app-authors-chips>
+  </p>
   <div class="course-form__footer">
     <a [routerLink]="['/..']" mat-raised-button color="accent">Cancel</a>
     <button

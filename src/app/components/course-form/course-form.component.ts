@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { CourseUpdate } from '../../shared/models/course.model';
+import { noAuthorsValidator } from '../authors-chips/authors-chips.validators';
 
 @Component({
   selector: 'app-course-form',
@@ -46,11 +47,18 @@ export class CourseFormComponent implements OnInit {
         Validators.required,
         Validators.min(0),
       ]),
+      authors: new FormControl([], noAuthorsValidator()),
     });
   }
 
   onSubmit(): void {
-    const { title, description, creationDate, duration } = this.courseForm?.getRawValue();
+    const {
+      title,
+      description,
+      creationDate,
+      duration,
+      authors,
+    } = this.courseForm?.getRawValue();
 
     this.saveCourse.emit({
       name: title,
@@ -58,6 +66,7 @@ export class CourseFormComponent implements OnInit {
       description,
       date: creationDate,
       topRated: false,
+      authors,
     });
   }
 }
