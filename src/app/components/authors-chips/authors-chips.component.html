@@ -1,0 +1,16 @@
+<mat-form-field appearance="outline">
+  <mat-label>Authors</mat-label>
+  <mat-chip-list #chipList>
+    <mat-chip
+      *ngFor="let author of authors"
+      (removed)="removeAuthor(author.name)"
+    >
+      {{author.name}} <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <input placeholder="Add author..."
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="addAuthor($event)"
+    >
+  </mat-chip-list>
+</mat-form-field>
