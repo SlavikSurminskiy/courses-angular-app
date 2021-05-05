@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { CourseUpdate } from '../../shared/models/course.model';
+import { Author, CourseUpdate } from '../../shared/models/course.model';
 import { noAuthorsValidator } from '../authors-chips/authors-chips.validators';
 
 @Component({
@@ -14,6 +14,7 @@ export class CourseFormComponent implements OnInit {
   @Input() title = '';
   @Input() description = '';
   @Input() duration = 0;
+  @Input() authors: Author[] | undefined = [];
 
   @Output() saveCourse = new EventEmitter<CourseUpdate>();
 
@@ -47,7 +48,7 @@ export class CourseFormComponent implements OnInit {
         Validators.required,
         Validators.min(0),
       ]),
-      authors: new FormControl([], noAuthorsValidator()),
+      authors: new FormControl(this.authors, noAuthorsValidator()),
     });
   }
 
