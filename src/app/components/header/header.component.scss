@@ -10,8 +10,45 @@
   justify-content: space-between;
   align-items: center;
 
+  &__controls {
+    display: flex;
+
+    ::ng-deep {
+      .mat-form-field-wrapper {
+        padding-bottom: 0;
+      }
+
+      .mat-form-field-appearance-outline {
+        .mat-form-field-outline {
+          color: $text-color-light;
+        }
+      }
+
+      mat-form-field {
+        .mat-hint, input, ::placeholder, .mat-form-field-label {
+          color: $text-color-light;
+        }
+
+        .mat-select-value-text {
+          color: $text-color-light;
+        }
+
+        .mat-select-arrow {
+          color: $text-color-light;
+        }
+
+        &.mat-focused.mat-primary {
+          .mat-select-arrow {
+            color: $text-color-light;
+          }
+        }
+      }
+    }
+  }
+
   &__buttons {
     display: flex;
+    margin-left: 20px;
 
     button, a {
       display: flex;
