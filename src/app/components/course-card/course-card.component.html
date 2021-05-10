@@ -22,14 +22,14 @@
     </div>
     <div class="actions">
       <a [routerLink]="[course.id, 'edit']" mat-raised-button color="accent">
-        <mat-icon>edit</mat-icon> Edit
+        <mat-icon>edit</mat-icon>{{ 'BUTTON.EDIT' | translate }}
       </a>
       <button
         mat-raised-button color="accent"
         (click)="onDeleteClick()"
       >
         <mat-icon>delete</mat-icon>
-        Delete
+        {{ 'BUTTON.DELETE' | translate }}
       </button>
     </div>
   </div>

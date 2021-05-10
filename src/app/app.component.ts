@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'courses-app';
 
   constructor(public translate: TranslateService) {
-    translate.addLangs(['en']);
+    translate.addLangs(['en', 'ua']);
     translate.setDefaultLang('en');
   }
 }

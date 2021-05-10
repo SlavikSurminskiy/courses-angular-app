@@ -1,0 +1,31 @@
+{
+  "COURSE": {
+    "NEW_COURSE": "Новий Курс",
+    "EDIT_COURSE": "Редагувати Курс",
+    "TITLE": "Назва",
+    "DESCRIPTION": "Опис",
+    "DATE": "Дата",
+    "DURATION": "Тривалість"
+  },
+  "BUTTON": {
+    "EDIT": "Редагувати",
+    "DELETE": "Видалити",
+    "CANCEL": "Закрити",
+    "SAVE": "Зберегти",
+    "LOGIN": "Ввійти",
+    "ADD": "Додати"
+  },
+  "BREADCRUMBS": {
+    "COURSES": "Курси",
+    "NEW": "Новий",
+    "EDIT": "Редагувати"
+  },
+  "HEADER": {
+    "LOGIN": "Вхід",
+    "LOG_OUT": "Вийти"
+  },
+  "COURSES_PAGE": {
+    "SEARCH_COURSES": "Шукати Курси",
+    "LOAD_MORE": "Завантажити ще"
+  }
+}

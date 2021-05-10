@@ -7,12 +7,12 @@
       <div class="header__buttons">
         <a [routerLink]="['login']" *ngIf="!isLogin; else logout">
           <mat-icon>person</mat-icon>
-          User login
+          {{ 'HEADER.LOGIN' | translate }}
         </a>
         <ng-template #logout>
           <button (click)="onLogout()">
             <mat-icon>logout</mat-icon>
-            Log out
+            {{ 'HEADER.LOG_OUT' | translate }}
           </button>
         </ng-template>
       </div>
