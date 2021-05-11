@@ -1,4 +1,9 @@
-<form (ngSubmit)="onSubmit()" class="course-form">
+<form
+  *ngIf="courseForm"
+  [formGroup]="courseForm"
+  (ngSubmit)="onSubmit()"
+  class="course-form"
+>
   <h1>{{headline}}</h1>
   <p>
     <mat-form-field appearance="outline">
@@ -8,7 +13,7 @@
         type="text"
         name="title"
         placeholder="Course title"
-        [(ngModel)]="title"
+        formControlName="title"
       >
     </mat-form-field>
   </p>
@@ -21,7 +26,7 @@
         type="text"
         name="description"
         placeholder="Course description"
-        [(ngModel)]="description"
+        formControlName="description"
       ></textarea>
     </mat-form-field>
   </p>
@@ -33,7 +38,7 @@
         type="date"
         name="new Date(creationDate)"
         placeholder="Course date"
-        [(ngModel)]="creationDate"
+        formControlName="creationDate"
       >
     </mat-form-field>
   </p>
@@ -45,14 +50,23 @@
         type="number"
         name="duration"
         placeholder="Course duration"
-        min="0"
-        [(ngModel)]="duration"
+        formControlName="duration"
       >
     </mat-form-field>
-    {{duration | courseDuration}}
+    {{courseForm.get('duration')?.value | courseDuration}}
+  </p>
+  <p>
+    <app-authors-chips formControlName="authors"></app-authors-chips>
   </p>
   <div class="course-form__footer">
     <a [routerLink]="['/..']" mat-raised-button color="accent">Cancel</a>
-    <button type="submit" mat-raised-button color="primary">Save</button>
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="!courseForm.valid"
+    >
+      Save
+    </button>
   </div>
 </form>

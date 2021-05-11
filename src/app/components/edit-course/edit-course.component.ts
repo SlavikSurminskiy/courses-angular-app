@@ -19,6 +19,7 @@ export class EditCourseComponent implements OnInit, OnDestroy {
     topRated: false,
     description: '',
     date: '',
+    authors: [],
   };
 
   private _courseId = '';
