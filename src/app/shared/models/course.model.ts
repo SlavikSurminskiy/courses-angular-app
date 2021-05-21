@@ -5,6 +5,11 @@ export interface ICourse {
   duration: number;
   topRated: boolean;
   description: string;
+  authors?: Author[];
+}
+
+export interface Author {
+  name: string;
 }
 
 export type CourseUpdate = Omit<ICourse, 'id'>;

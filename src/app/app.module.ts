@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -33,6 +35,7 @@ import { CourseCardComponent } from './components/course-card/course-card.compon
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
 import { CourseFormComponent } from './components/course-form/course-form.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { AuthorsChipsComponent } from './components/authors-chips/authors-chips.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DeleteCourseDialogComponent } from './components/delete-course-dialog/delete-course-dialog.component';
 
@@ -75,6 +78,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     EditCourseComponent,
     BreadcrumbsComponent,
     PageNotFoundComponent,
+    AuthorsChipsComponent,
     DeleteCourseDialogComponent,
     CourseCardCreationDateDirective,
     CourseDurationPipe,
@@ -88,12 +92,15 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HttpClientModule,
     MatIconModule,
     MatInputModule,
+    MatChipsModule,
     MatButtonModule,
     MatDividerModule,
     MatSidenavModule,
     MatDialogModule,
     MatSelectModule,
     MatOptionModule,
+    MatSnackBarModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     StoreModule.forRoot({
