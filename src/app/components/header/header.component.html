@@ -4,17 +4,34 @@
       <div class="header__logo">
         <app-logo></app-logo>
       </div>
-      <div class="header__buttons">
-        <a [routerLink]="['login']" *ngIf="!isLogin; else logout">
-          <mat-icon>person</mat-icon>
-          User login
-        </a>
-        <ng-template #logout>
-          <button (click)="onLogout()">
-            <mat-icon>logout</mat-icon>
-            Log out
-          </button>
-        </ng-template>
+      <div class="header__controls">
+        <mat-form-field appearance="outline">
+          <mat-label>Languages</mat-label>
+          <mat-select
+            panelClass="qwerty"
+            (selectionChange)="onLanguageChange($event)"
+            [(value)]="selectedLanguage"
+          >
+            <mat-option
+              *ngFor="let language of languages"
+              [value]="language.value"
+            >
+              {{language.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="header__buttons">
+          <a [routerLink]="['login']" *ngIf="!isLogin; else logout">
+            <mat-icon>person</mat-icon>
+            {{ 'HEADER.LOGIN' | translate }}
+          </a>
+          <ng-template #logout>
+            <button (click)="onLogout()">
+              <mat-icon>logout</mat-icon>
+              {{ 'HEADER.LOG_OUT' | translate }}
+            </button>
+          </ng-template>
+        </div>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <app-course-form
   *ngIf="course.id"
-  headline="Edit course"
+  [headline]="'COURSE.EDIT_COURSE' | translate"
   [title]="course.name"
   [description]="course.description"
   [duration]="course.duration"

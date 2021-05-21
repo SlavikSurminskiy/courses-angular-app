@@ -1,0 +1,31 @@
+{
+  "COURSE": {
+    "NEW_COURSE": "New Course",
+    "EDIT_COURSE": "Edit Сourse",
+    "TITLE": "Title",
+    "DESCRIPTION": "Description",
+    "DATE": "Date",
+    "DURATION": "Duration"
+  },
+  "BUTTON": {
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "CANCEL": "Cancel",
+    "SAVE": "Save",
+    "LOGIN": "Login",
+    "ADD": "Add"
+  },
+  "BREADCRUMBS": {
+    "COURSES": "Courses",
+    "NEW": "New",
+    "EDIT": "Edit"
+  },
+  "HEADER": {
+    "LOGIN": "User Login",
+    "LOG_OUT": "Log out"
+  },
+  "COURSES_PAGE": {
+    "SEARCH_COURSES": "Search Courses",
+    "LOAD_MORE": "Load More"
+  }
+}

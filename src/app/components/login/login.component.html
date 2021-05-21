@@ -26,7 +26,7 @@
         formControlName="password"
       >
       <mat-error *ngIf="loginForm.get('password')?.invalid">
-        Password shoud be at least 6 characters
+        Password should be at least 6 characters
       </mat-error>
     </mat-form-field>
   </p>
@@ -38,7 +38,7 @@
       color="primary"
       [disabled]="!loginForm.valid"
     >
-      Login
+      {{ 'BUTTON.LOGIN' | translate }}
     </button>
   </div>
 </form>

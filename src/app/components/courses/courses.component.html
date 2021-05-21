@@ -2,7 +2,9 @@
   <div class="courses__search">
     <form>
       <mat-form-field appearance="outline">
-        <mat-label>Search courses</mat-label>
+        <mat-label>
+          {{ 'COURSES_PAGE.SEARCH_COURSES' | translate }}
+        </mat-label>
         <input
           matInput
           type="text"
@@ -18,7 +20,7 @@
 
   <div class="courses__add">
     <a [routerLink]="['new']" mat-raised-button color="accent">
-      <mat-icon>add</mat-icon> Add
+      <mat-icon>add</mat-icon> {{ 'BUTTON.ADD' | translate }}
     </a>
   </div>
 
@@ -30,7 +32,9 @@
   ></app-course-card>
 
   <div class="courses__load-more" *ngIf="(courses$ | async)!.length > 0; else noCourses">
-    <button (click)="onLoadMore()">Load More</button>
+    <button (click)="onLoadMore()">
+      {{ 'COURSES_PAGE.LOAD_MORE' | translate }}
+    </button>
   </div>
 
   <ng-template #noCourses>

@@ -29,7 +29,7 @@ export class EditCourseComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _route: ActivatedRoute,
     private _coursesService: CoursesService,
-    private _loadingServise: LoadingService,
+    private _loadingService: LoadingService,
   ) {}
 
   ngOnInit(): void {
@@ -46,10 +46,10 @@ export class EditCourseComponent implements OnInit, OnDestroy {
   }
 
   onSaveCourse(course: CourseUpdate): void {
-    this._loadingServise.showLoader$.next(true);
+    this._loadingService.showLoader$.next(true);
 
     this._coursesService.updateCourse(this._courseId, course).subscribe(() => {
-      this._loadingServise.showLoader$.next(false);
+      this._loadingService.showLoader$.next(false);
 
       this._router.navigate(['../']);
     });
